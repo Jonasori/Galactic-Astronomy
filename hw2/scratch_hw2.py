@@ -53,7 +53,6 @@ def spectrum(t, coeff, show=False):
 
     return (freqs_thz, model, data)
 
-m, d = spectrum(6550, 4.8, save=True)
 
 
 
@@ -91,7 +90,6 @@ def lnprob(p, mags, priors, save=False):
 
 
 
-mags = [9.31, 8.94, 8.11, 7.93, 7.84]
 def run_mcmc(mags=mags, nsteps=1000):
 
     ndim, nwalkers = 2, 30
@@ -134,7 +132,7 @@ def run_mcmc(mags=mags, nsteps=1000):
 # run2 = run_mcmc(mags, nsteps=50)
 
 
-
+mags = [9.31, 8.94, 8.11, 7.93, 7.84]
 def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
     plt.close()
 
@@ -181,7 +179,7 @@ def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
     else:
         plt.show()
 
-mcmc_full_driver()
+# mcmc_full_driver()
 
 # pos, prob, state = run
 #
@@ -210,8 +208,6 @@ def radec_to_galactic_astropy(pos_radec):
     galactic_coords_str = radec_coords_deg.transform_to('galactic').to_string()
     galactic_coords_degs = [float(coord) for coord in galactic_coords_str.split(' ')]
     return galactic_coords_degs
-
-
 
 def radec_to_galactic(coords):
     """
@@ -254,15 +250,6 @@ def radec_to_galactic(coords):
     # Convert to degrees and round out to 4 decs for prettiness.
     l, b = round(l * 180/np.pi, 4), round(b * 180/np.pi, 4)
     return [l, b]
-
-
-
-
-
-
-
-
-
 
 
 
