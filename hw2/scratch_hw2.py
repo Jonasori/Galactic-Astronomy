@@ -172,7 +172,7 @@ def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
     else:
         plt.show()
 
-# mcmc_full_driver()
+mcmc_full_driver(save=True)
 
 
 

@@ -1,0 +1,194 @@
+\documentclass[12pt]{article}
+%\usepackage[margin=1in]{geometry}
+\usepackage[left=2.5cm, right=2.5cm, top=2cm]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{scrextend}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+
+% Set up stuff to handle Python code nicely.
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\setlength{\columnsep}{0.3in}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+
+\newenvironment{answer}[2][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newcommand\textlcsc[1]{\textsc{\MakeLowercase{#1}}}
+
+% Enable one-column figures in multicol.
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+
+\begin{document}
+
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+
+% \title{AST 221: Problem Set 1}
+% \author{Jonas Powell}
+% \maketitle
+
+
+% make title bold and 14 pt font (Latex default is non-bold, 11 pt)
+\title{\Large \textbf{Galactic Astronomy: Problem Set X}}
+
+\author{{\rm Jonas Powell, \textit{Wesleyan University}}}
+
+
+\maketitle
+
+
+\begin{addmargin}[4em]{4em}
+\noindent {\bf Due: Thursday, Feb. 28 by midnight.} Late papers are not accepted. If you cannot complete the assignment, hand in what you have completed before the deadline. Consider the deadline to be like the boarding time for an airplane, or the deadline for a grant submission to NASA or NSF. If you miss the deadline, you do not get on the airplane, no matter how good your excuse is. If you miss an NSF or NASA deadline, you do not get the grant, no matter how good your project is. The best advice is ... finish early. You can submit multiple times, right up to the deadline. Whatever your latest submission is, when the deadline occurs, is what will be graded.
+\bigskip \bigskip
+\end{addmargin}
+
+
+% Begin two-column layout
+% if using this, change margins (line 3) to like 1cm-ish
+%\begin{multicols*}{2}
+
+
+\begin{problem}{1}
+  There is an error in the book on page 108? What correction is required?
+\end{problem}
+
+\begin{answer}{1}
+\end{answer}
+
+
+
+\begin{problem}{2} Become familiar enough with stellar spectra that you can easily classify, at a glance, almost any spectrum into one of the main classes (OBAFGKM) to within plus or minus 1 class. Note that I am not talking about subclasses here, i.e telling a G2 star from a G3 star, which is difficult. I am talking about telling a G star from an A star or an M star. As an illustration of your prowess, how would you classify each of the stars shown below.
+
+\includegraphics [scale=0.3] {UnknownSpectra.pdf}
+\end{problem}
+
+\begin{answer}{2}
+\end{answer}
+
+
+
+\begin{problem}{3}
+  Make an HR diagram that compares a sample of the nearest stars (100 or so would do) with a sample of the brightest stars (chosen by apparent magnitude). The Sun, of course, will be in both data sets, since it is the nearest and the brightest. Plot everything on the same diagram and use different symbols and/or colors to differentiate between the nearest and the brightest. There are a variety of catalogs you could use for this, including Gaia, Hipparcos, Gliese, Yale, etc. You may choose where to get your data and exactly what quantities you wish to plot. For example, luminosities could be in terms of M$_V$, M$_{bol}$, L/L$_\odot$, etc. and effective temperatures could be in terms of B-V, some other color index, T$_e$, etc. These are up to you! Make a great looking plot and then describe it and what it tells you about the stellar population in the Galaxy (and other galaxies, as it turns out).
+
+\end{problem}
+
+\begin{answer}{3}
+    % A FIGURE
+  % \begin{figure}[htp]
+  %   \hspace*{\fill}%
+  %   \subcaptionbox{\label{fig:lab1}}{\includegraphics[width=0.48\linewidth]{fig2.pdf}}\hfill%
+  %   \subcaptionbox{\label{fig:lab2}}{\includegraphics[width=0.48\linewidth]{fig1.pdf}}\hfill%
+  %   \hspace*{\fill}%
+  %   \caption{blah}
+  % \end{figure}
+\end{answer}
+
+\begin{problem}{4}
+  Determine the stellar number density and mass density in the solar neighborhood based on the sample of the 100 or so nearest stars that you used in problem 3. Note that you will need to assign masses to these objects, using a mass-luminosity relationship, which you adopt. Report your results in several different ways, so that you can get a feeling for what they mean. In particular, give the number density in units of stars per pc$^{-3}$, and the mass density in terms of M$_\odot$ pc$^{-3}$, gm cm$^{-3}$, and H-atoms cm$^{-3}$.
+\end{problem}
+
+\begin{answer}{4}
+Your answer goes here. Show your work. Justify your conclusions.
+\end{answer}
+
+
+
+
+\begin{problem}{5}
+  Problem 3.1 at the end of Chapter 3 of the textbook.
+\end{problem}
+
+\begin{answer}{5}
+Your answer goes here. Show your work. Justify your conclusions.
+\end{answer}
+
+
+
+
+\begin{problem}{6}
+  Problem 3.2 at the end of Chapter 3 of the textbook.
+\end{problem}
+
+
+\begin{answer}{6}
+\end{answer}
+
+
+
+%   % A TABLE
+%   \centerline{\textbf{Results}}
+%   \smallskip
+%   \centerline{
+%   \begin{tabular} {cc}
+%   \hline \hline
+%   l, b          & (324.52$^o$, 53.49$^o$) \\
+%   M$_V$         & 6.19 \\
+%   E(B-V)        & 0.75 \\
+%   A$_V$         & 2.25 \\
+%   d             & 30.48 pc \\
+%   v$_{space}$   & 2628 km s$^{-1}$ \\
+%   M$_{bol}$     & 5.9 \\
+%   T$_e$         & 5040 \\
+%   L/L$_\odot$   & 0.27 \\
+%   M/M$_\odot$   & 0.72 \\
+%   R/R$_\odot$   & 0.55 \\
+%   \hline
+%   \end{tabular}}
+% \end{answer}
+% \bigskip \bigskip
+
+
+
+%\end{multicols*}
+\vfill\eject
+\clearpage
+
+
+\lstinputlisting[language=Python]{scratch_hw3.py}
+
+
+
+\end{document}

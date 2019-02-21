@@ -81,7 +81,7 @@
 
 
 \begin{addmargin}[4em]{4em}
-\noindent {\bf Due: Thursday, Feb. 14 by midnight.} Late papers are not accepted. If you cannot complete the assignment, hand in what you have completed before the deadline. Consider the deadline to be like the boarding time for an airplane, or the deadline for a grant submission to NASA or NSF. If you miss the deadline, you do not get on the airplane, no matter how good your excuse is. If you miss an NSF or NASA deadline, you do not get the grant, no matter how good your project is. The best advice is ... finish early. You can submit multiple times, right up to the deadline. Whatever your latest submission is, when the deadline occurs, is what will be graded.
+\noindent {\bf Due: Thursday, Feb. 21 by midnight.} Late papers are not accepted. If you cannot complete the assignment, hand in what you have completed before the deadline. Consider the deadline to be like the boarding time for an airplane, or the deadline for a grant submission to NASA or NSF. If you miss the deadline, you do not get on the airplane, no matter how good your excuse is. If you miss an NSF or NASA deadline, you do not get the grant, no matter how good your project is. The best advice is ... finish early. You can submit multiple times, right up to the deadline. Whatever your latest submission is, when the deadline occurs, is what will be graded.
 \bigskip \bigskip
 \end{addmargin}
 
@@ -117,10 +117,10 @@
   %\includegraphics [scale=0.4] {SamplePDF.pdf}
   To fit the data, we first convert them from magnitudes to flux densities by recalling:
   \begin{align*}
-    f_\nu &= \text{zpf}\ 10^{-0.4\ M}
+    f_\nu &= \text{zpf}\ 10^{-0.4\ M},
   \end{align*}
 
-  As a model, we will use a blackbody curve, given by Planck's Law:
+  where ZPF is the spectral band's zero-point flux (given on the course Moodle page), and M is the star's magnitude in the spectral band. As a model, we will use a blackbody curve, given by Planck's Law:
   \begin{align*}
     B(\nu, T) &= \frac{2h\nu^3}{c^2}\ \frac{1}{e^{\frac{h \nu}{k_B T}} - 1}
   \end{align*}
@@ -132,25 +132,22 @@
           &\approx \Omega_0 B(\nu, T),
   \end{align*}
 
-  where $\Omega$ is the solid angle subtended by the source. Since astronomical sources are very far away, this solid angle is bound to be extremely small, meaning that the resulting scaling factor between $B(\nu)$ and $f_\nu$, $\Omega_0$, will be an extremely small number. Further complicating this is the fact that, since we don't know the star's distance, we don't know the solid angle it subtends anyways. Therefore, we must now fit both for temperature, T, as well as for $\Omega_0$.
+  where $\Omega$ is the solid angle subtended by the source. Since astronomical sources are very far away, this solid angle is bound to be extremely small, meaning that the resulting scaling factor, $\Omega_0$, between $B(\nu)$ and $f_\nu$ will be an extremely small number. Further complicating this is the fact that, since we don't know the star's distance, we don't know the solid angle it subtends anyways. Therefore, we must now fit both for temperature, T, as well as for $\Omega_0$.
 
   Since I find manually fitting two dimensions by hand to be a bit tedious, I decided to fit the two dimensions using a Markov Chain Monte Carlo (MCMC) routine. MCMC is a valuable tool for modeling in astronomy, and the field has benefited greatly from the Python package \texttt{emcee} (Foreman-Mackey et al. 2012), which makes this algorithm accessible fairly easily. MCMC works by sampling, in a pseudo-random walk, the probability distribution for a given parameter space, which means that not only is a best-fit value accessible (at the high-point of that distribution), but so too is an approximation of the distribution itself, which is an extremely informative feature to have.
 
-  To run my MCMC, I developed a probability function that sampled a blackbody curve of a given temperature at the frequencies of the given data, then calculated a $\chi^2$ value between the data and model ($\chi^2 = \Sum_i (\text{data} - \text{model})^2$), which was then turned into a log-probability ($\ln \text{prob} = -0.5 \chi^2$) value and fed back into the MCMC run, informing the run's next step. The log-probabilities are show in Fig \ref{fig:mcmc_kde} in $\Omega_0-T$ parameter space.
-
-
   \begin{figure}[htp]
     \hspace*{\fill}%
-    \subcaptionbox{\label{fig:mcmc_kde}}{\includegraphics[width=0.48\linewidth]{prob2_kde_5ksteps.pdf}}\hfill%
-    \subcaptionbox{\label{fig:v2434ori_mann09}}{\includegraphics[width=0.48\linewidth]{prob2_fitSED.pdf}}\hfill%
+    \subcaptionbox{\label{fig:mcmc_kde}}{\includegraphics[width=0.42\linewidth]{prob2_kde.pdf}}\hfill%
+    \subcaptionbox{\label{fig:mcmc_spectrum}}{\includegraphics[width=0.56\linewidth]{prob2_spectrum.pdf}}\hfill%
     \hspace*{\fill}%
-    \caption{Results from an MCMC fitting run characterizing the probability distribution of points in $\Omega_0-T$ parameter space. Darker regions correspond to better fits.}
+    \caption{Results from an MCMC fitting run. The kernel-density estimate (KDE) on the left characterizes the probability distribution of points in $\Omega_0-T$ parameter space, where darker regions correspond to better fits. On the right, data and best-fit model are overlaid, demonstrating that a good solution was found.}
   \end{figure}
 
-  As we see, there is some degree of degeneracy between the two parameters. This is somewhat reasonable, since increases in temperature and solid angle-subtended will both result in increased flux density for a source.
 
+  To run my MCMC, I developed a probability function that sampled a blackbody curve of a given temperature at the frequencies of the given data, then calculated a $\chi^2$ value between the data and model ($\chi^2 = \sum_i (\text{data} - \text{model})^2$), which was then turned into a log-probability ($\ln \text{prob} = -0.5 \chi^2$) value and fed back into the MCMC run, informing the run's next step. The log-probabilities are shown in Fig \ref{fig:mcmc_kde} in $\Omega_0-T$ parameter space.
 
-  Stars with B-V colors of 0.37, such as this star, are typically F2 stars.
+  As we see, there is some degree of degeneracy between the two parameters. This is somewhat reasonable, since increases in temperature and solid angle-subtended will both result in increased flux density for a source. However, the resulting fit (Fig \ref{fig:mcmc_spectrum}) looks pretty splendid, returning a best-fit temperature of 6745 K, which is characteristic of an F3 star. This is quite close to the F2 stellar type that is predicted by the star's 0.37 B-V color, indicating that the star is either truly an F3 that has been a bit reddened, or it is an F2 star that is slightly too cool.
 \end{answer}
 
 
@@ -198,7 +195,7 @@
   T$_e$         & 5040 \\
   L/L$_\odot$   & 0.27 \\
   M/M$_\odot$   & 0.72 \\
-  R/R$_\odot$   & 0.55 \\
+  R/R$_\odot$   & 0.68 \\
   \hline
   \end{tabular}
   }
@@ -228,21 +225,21 @@
 
     \item \textbf{v$_{space}$}: The space velocity is the triangulation of the proper motion, $\mu$, and the radial velocity, i.e. $v_{space} &= \sqrt{ v_{rad}^2 + v_{trans}^2 }$. To solve this, we must turn proper motion into a velocity, using the familiar equation, $v_{trans} = 4.74\ \mu\ d = 4.74\ (13.7) (30.48) = 2628$ km s$^{-1}$}. Therefore, $v_{space} &= \sqrt{ (13)^2 + (2628)^2 } \approx 2628$ km s$^{-1}$}. This feels way too high, but I don't really have any justification to back up that intuition and the math seems tight, so I guess that's what I'll submit.
 
-    \item \textbf{T$_eff$}: Looking it up, we find that for a K2V star, T$_{eff}$ = 5040.
+    \item \textbf{T$_{eff}$}: Looking it up, we find that for a K2V star, T$_{eff}$ = 5040.
     \item \textbf{L/L$_\odot$}: Since luminosity and magnitudes are related as $M - M_{\odot} = -2.5 \log{\frac{L}{L_{\odot}}}$, then we may look up values for $M$ and $M_{\odot}$ and find $\frac{L}{L_{\odot}} = 10^{-0.4\ (M - M_{\odot})} = 10^{-0.4\ (6.19 - 4.79)} = 0.27$
     \item \textbf{M/M$_\odot$}: From the Mass/Luminosity relation, we know that $\frac{M}{M_{\odot}} = \frac{L}{L_{\odot}}^{1/4} = 0.72$
     \item \textbf{R/R$_\odot$}: We may find the radius by first recalling:
 
     \begin{align*}
-      T_{eff} &= \frac{L}{4 \pi\ R^2}
+      T_{eff}^4 &= \frac{L}{4 \pi\ R^2 \sigma}
     \end{align*}
 
     Since we know T$_{eff}$ for our fictional star and the Sun (another lookup reveals that a G2V's effective temperature is 5770), and we know the two's luminosity ratio, we may construct the following ratio by rearranging the above equation and solving for the radius relationship:
     \begin{align*}
-      \frac{L}{L_\odot} &= \frac{4 \pi\ R^2 T_{eff}}{4 \pi\ R_{\odot}^2 T_{eff, \odot}} \\
-      \rightarrow \frac{R}{R_{\odot}} &= \sqrt{\frac{L}{L_\odot} \frac{T_{eff, \odot}}{T_{eff}}} \\
-        &= \sqrt{0.27 \times \frac{5770}{5040}} \\
-        &= 0.55
+      \frac{L}{L_\odot} &= \frac{4 \pi\ R^2 T_{eff}^4}{4 \pi\ R_{\odot}^2 T_{eff, \odot}^4} \\
+      \rightarrow \frac{R}{R_{\odot}} &= \sqrt{\frac{L}{L_\odot} \left(\frac{T_{eff, \odot}}{T_{eff}}\right)^4} \\
+        &= \sqrt{0.27 \times \left(\frac{5770}{5040}\right)^4} \\
+        &= 0.68
     \end{align*}
 
   Thus, $R/R_{\odot} \approx 0.55$.
@@ -255,7 +252,7 @@ Given that this is a K-star, we expect it to have a high metallicity. Lower mass
 
 To determine the star's planet forming potential, I decided to see what the real data say about planets around this type of star. To do so, I used the Python package \texttt{kplr}, an API wrapper of the Kepler database's data portal, to download information about $\sim$2300 planets. Each planet's information contained a field with information about it's host star. This allowed me to develop my own little database with features like metallicity, effective temperature, colors, and so on for each confirmed planet's host.
 
-Unfortunately, one feature that my database did not yet contain was spectral type. This is obviously critical, since the whole point of this little project was to determine the relative frequency of planets around stars by spectral type. I decided to use effective temperature as a spectral type proxy, since it goes linearly with spectral type and I had access to good data on the spectral class/T$_{eff}$ relationship. To do this, I copied, processed, and tabulated the table that I used above for other reference values (\url{http://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt}). I was then able to iterate through each star in my database, cross-check its reported T$_{eff}$ against the list of effective temperatures in the linked table, and label the star with the spectral type attached to the nearest T$_{eff}$ value in the linked table. This is a somewhat sketchy way of spectral-typing stars and, were this a more serious project, is definitely something I would give more thought to, but for the time being, it gave me a good, quick way to get approximate spectral types.
+Unfortunately, one feature that my database did not yet contain was spectral type. This is obviously critical, since the whole point of this little project was to determine the relative frequency of planets around stars by spectral type. I decided to use effective temperature as a spectral type proxy, since it goes linearly with spectral type and I had access to good data on the spectral class/T$_{eff}$ relationship. To do this, I copied, processed, and tabulated the table that I used above for other reference values into a robust dataframe in Python. I was then able to iterate through each star in my database, cross-check its reported T$_{eff}$ against the list of effective temperatures in the linked table, and label the star with the spectral type attached to the nearest T$_{eff}$ value in the linked table. This is a somewhat sketchy way of spectral-typing stars and, were this a more serious project, is definitely something I would give more thought to, but for the time being, it gave me a good, quick way to get approximate spectral types.
 
 \begin{figure}[htp]
   \hspace*{\fill}%
