@@ -88,7 +88,7 @@ def lnprob(p, mags, priors, save=False):
 
 def run_mcmc(mags=mags, nsteps=1000):
 
-    ndim, nwalkers = 2, 30
+    ndim, nwalkers = 2, 50
     priors_t = {'min': 0, 'max': 20000}
     priors_coeff = {'min': 0, 'max': 30}
     priors = [priors_t, priors_coeff]
@@ -142,6 +142,8 @@ def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
     plt.tight_layout()
     if save:
         plt.savefig('prob2_kde.pdf')
+        plt.clf()
+        plt.close()
         print "Saved plot to prob2_kde.pdf"
     else:
         plt.show()
@@ -152,6 +154,7 @@ def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
     coeff = df[df['lnprob'] == max(df['lnprob'])]['coeff'].values[0]
     freqs, model, data = spectrum(t, coeff, show=False)
     print "Got spectrum."
+
 
     plt.plot(freqs, model, 'or', label='Model')
     plt.plot(freqs, data, 'ob', label='Data')
@@ -168,11 +171,12 @@ def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
 
     if save:
         plt.savefig('prob2_spectrum.pdf')
+        plt.close()
         print "Saved plot to prob2_spectrum.pdf"
     else:
         plt.show()
 
-mcmc_full_driver(save=True)
+# mcmc_full_driver(save=True)
 
 
 
