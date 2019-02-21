@@ -27,8 +27,7 @@ sns.set_style('white')
 
 # Problem 2
 
-def spectrum(t, coeff, save=False):
-    plt.close()
+def spectrum(t, coeff, show=False):
 
     temp = t * u.K
     mags = [9.31, 8.94, 8.11, 7.93, 7.84]
@@ -43,35 +42,24 @@ def spectrum(t, coeff, save=False):
     model_f_nu = [((2 * h * nu**3 * c**(-2)) / (-1 + np.exp(h * nu/(k_B * temp)))).to('Jy') * fudge
                  for nu in freqs]
 
-    freqs4plotting = [nu.to('THz').value for nu in freqs]
+    freqs_thz = [nu.to('THz').value for nu in freqs]
     model = [f.value for f in model_f_nu]
     data = [f.value for f in data_f_nu]
-    plt.plot(freqs4plotting, model, 'or', label='Model')
-    plt.plot(freqs4plotting, data, 'ob', label='Data')
-    plt.plot(freqs4plotting, model, '-r')
-    plt.plot(freqs4plotting, data, '-b')
-    plt.legend()
-    text_x = 0.6 * (np.nanmin(freqs4plotting) + np.nanmax(freqs4plotting))
-    text_y = 0.35 * (np.nanmin(model + data) + np.nanmax(model + data))
-    plt.text(text_x, text_y,
-             'Temperature: {}'.format(t), weight='bold')
-    plt.xlabel('Frequency (THz)', weight='bold')
-    plt.ylabel(r"F$_{\nu}$ (Jy)", weight='bold')
-    sns.despine()
-    if save:
-        plt.savefig('prob2_fitSED.pdf')
-        print "Saved to 'prob2_fitSED.pdf'"
-    else:
-        plt.show()
 
-    return (model, data)
+
+    if show:
+        plt.show()
+    else:
+        pass
+
+    return (freqs_thz, model, data)
 
 m, d = spectrum(6550, 4.8, save=True)
 
 
 
 
-def lnprob(p, priors, save=False):
+def lnprob(p, mags, priors, save=False):
     t, coeff = p
 
     # Check on priors:
@@ -80,7 +68,6 @@ def lnprob(p, priors, save=False):
             return -np.inf
 
     temp = t * u.K
-    mags = [9.31, 8.94, 8.11, 7.93, 7.84]
     wavelengths = [0.438 * u.um, 0.545 * u.um, 1.22 * u.um, 1.63 * u.um, 2.19 * u.um]
     freqs = [(c/(lam).decompose()).to('Hz') for lam in wavelengths] # Hz
 
@@ -105,62 +92,98 @@ def lnprob(p, priors, save=False):
 
 
 
+mags = [9.31, 8.94, 8.11, 7.93, 7.84]
+def run_mcmc(mags=mags, nsteps=1000):
 
-def run_mcmc(nwalkers=30, nsteps=1000, save=False):
-    plt.close()
-
-    ndim = 2
+    ndim, nwalkers = 2, 30
     priors_t = {'min': 0, 'max': 20000}
     priors_coeff = {'min': 0, 'max': 30}
     priors = [priors_t, priors_coeff]
 
     p0 = np.random.normal(loc=(4000, 4), size=(nwalkers, ndim))
-    sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args=[priors])
+    sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args=[mags, priors])
     pos, prob, state = sampler.run_mcmc(p0, 10)
     prob
     sampler.reset()
     print "Finished burn-in; starting full run now."
-    sampler.run_mcmc(pos, nsteps)
+    # sampler.run_mcmc(pos, nsteps)
 
-    # run = sampler.sample(pos, iterations=nsteps, storechain=True)
-    # steps = []
-    # for i, result in enumerate(run):
-    #     # Maybe do this logging out in the lnprob function itself?
-    #     pos, lnprobs, blob = result
-    #     print "Lnprobs: ", lnprobs
-    #
-    #     new_step = [np.append(pos[k], lnprobs[k]) for k in range(nwalkers)]
-    #     steps += new_step
-    #
-    #
-    # df = pd.DataFrame(steps)
+    run = sampler.sample(pos, iterations=nsteps, storechain=True)
+    steps = []
+    for i, result in enumerate(run):
+        # Maybe do this logging out in the lnprob function itself?
+        pos, lnprobs, blob = result
 
+        new_step = [np.append(pos[k], lnprobs[k]) for k in range(nwalkers)]
+        steps += new_step
 
+        sys.stdout.write("Completed step {} of {}  \r".format(i, nsteps) )
+        sys.stdout.flush()
 
+    df = pd.DataFrame(steps)
+    df.columns = ['temp', 'coeff', 'lnprob']
+
+    print "Finished MCMC."
     print("Mean acceptance fraction: {0:.3f}".format(np.mean(sampler.acceptance_fraction)))
-    print "Finished full run; plotting now."
 
-    # sns.jointplot(x=sampler.flatchain[:,0], y=sampler.flatchain[:,1], kind="kde")
-    sns.jointplot(x=sampler.flatchain[:,0], y=sampler.flatchain[:,1], kind="kde")
-
-    plt.xlim(priors_t['min'], priors_t['max'])
-    plt.ylim(priors_coeff['min'], priors_coeff['max'])
-    plt.xlabel('Effective Temperature')
-    plt.ylabel(r"$\Omega_0$")
+    # xlims, ylims = (priors_t['min'], priors_t['max']), (priors_coeff['min'], priors_coeff['max'])
 
 
+    return (sampler, df)
 
+
+# run2 = run_mcmc(mags, nsteps=50)
+
+
+
+def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
+    plt.close()
+
+    # First, execute the MCMC run. If one is passed as an argument, don't.
+    if not prev_run:
+        sampler, df = run_mcmc(nsteps=nsteps)
+    else:
+        sampler, df = prev_run
+
+    # Now make some plots.
+    jp = sns.jointplot(x=sampler.flatchain[:,0], y=sampler.flatchain[:,1],
+                       kind="kde")
+    jp.set_axis_labels('Effective Temperature', r"$\Omega_0$", weight='bold')
+    plt.tight_layout()
     if save:
         plt.savefig('prob2_kde.pdf')
         print "Saved plot to prob2_kde.pdf"
     else:
         plt.show()
 
-    return df
 
+    # Get the data for the SED.
+    t = df[df['lnprob'] == max(df['lnprob'])]['temp'].values[0]
+    coeff = df[df['lnprob'] == max(df['lnprob'])]['coeff'].values[0]
+    freqs, model, data = spectrum(t, coeff, show=False)
+    print "Got spectrum."
 
-# run2 = run_mcmc(nsteps=5000, save=True)
-#
+    plt.plot(freqs, model, 'or', label='Model')
+    plt.plot(freqs, data, 'ob', label='Data')
+    plt.plot(freqs, model, '-r')
+    plt.plot(freqs, data, '-b')
+
+    plt.xlabel('Frequency (THz)', weight='bold')
+    plt.ylabel(r"F$_{\nu}$ (Jy)", weight='bold')
+
+    plt.title("Best-Fit SED at T = {}".format(round(t, 2)), weight='bold')
+    plt.legend()
+    plt.tight_layout()
+    sns.despine()
+
+    if save:
+        plt.savefig('prob2_spectrum.pdf')
+        print "Saved plot to prob2_spectrum.pdf"
+    else:
+        plt.show()
+
+mcmc_full_driver()
+
 # pos, prob, state = run
 #
 # run.chain.shape
