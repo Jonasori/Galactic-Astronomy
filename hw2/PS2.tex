@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+
+\newenvironment{answer}[2][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\title{AST 221: Problem Set 2}
+\author{Your Name Goes Here}
+\maketitle
+
+\noindent {\bf Due: Thursday, Feb. 14 by midnight.} Late papers are not accepted. If you cannot complete the assignment, hand in what you have completed before the deadline. Consider the deadline to be like the boarding time for an airplane, or the deadline for a grant submission to NASA or NSF. If you miss the deadline, you do not get on the airplane, no matter how good your excuse is. If you miss an NSF or NASA deadline, you do not get the grant, no matter how good your project is. The best advice is ... finish early. You can submit multiple times, right up to the deadline. Whatever your latest submission is, when the deadline occurs, is what will be graded.
+ 
+\begin{problem}{1}  There is a small error in the book in the first paragraph of Section 2.3. What is the correction required?
+
+\end{problem}
+
+\begin{answer}{1}
+Your answer goes here. Show your work. Justify your conclusions.
+\end{answer}
+
+\begin{problem}{2} Estimate the effective temperature of a star with the following properties, by fitting a black body curve to its flux density distribution:
+
+\bigskip
+\centerline {B = 9.31, V = 8.94, J= 8.11, H = 7.93, K = 7.84}
+\bigskip
+
+\noindent Plot the data and the black body that you chose as your best fit to the data and attach the plot to your answer. You can make this fit simply by eye, or you can use a more sophisticated fitting process -- it is up to you. Based on the color of the star, estimate its spectral type, neglecting interstellar reddening. Compare the effective temperature based on the black body fit to the one based on the spectral type of the star and comment on the difference. Assuming that the star has luminosity class V, what is its distance, again neglecting interstellar reddening? 
+\bigskip
+
+\noindent {\bf Note on including pdf files in your homework:} The output from your computer program that does the black body fit and compares to the data should be a pdf file. You can include pdf files in your homework answers following the example given at the end of this file, which includes the file SamplePDF.pdf in this answer sheet. Simply delete the file name SamplePDF.pdf and replace it with the name of your figure file. Make sure, of course, to put your figure file into the same directory as your .tex file, or include the full path to where your figure file is.
+
+\end{problem}
+
+\begin{answer}{2}
+Your answer goes here. Show your work. Justify your conclusions.
+
+\pagebreak
+
+\noindent {\bf Here is an example of how to include a pdf file in your homework:}
+
+\bigskip
+\bigskip
+
+\includegraphics [scale=0.4] {SamplePDF.pdf}
+
+\end{answer}
+ 
+\begin{problem}{3} Given the information on a fictitious star, as listed in the table below, determine its other properties. Present your results as a table and explain each calculation in comments below the table. 
+
+\bigskip
+
+\centerline{Table of data on a fictious star}
+\smallskip
+\centerline{
+\begin{tabular} {cc}
+\hline
+\hline
+$\alpha,\delta$ & 13:42:25.6, -7:13:42.1 (J2000.00) \\
+$\mu$ & 13.7 mas y$^{-1}$ \\ 
+PA & 122\textdegree \\ 
+v$_r$ & -13 km s$^{-1}$ \\
+V & 10.86 \\ 
+B-V & 1.63 \\ 
+SpT & K2V \\
+\hline
+\end{tabular}
+}
+
+\bigskip
+
+\noindent {\bf Properties for you to determine and tabulate:} (l,b), M$_V$,  E(B-V), A$_V$, d, the
+magnitude of heliocentric space velocity (v$_{space})$, M$_{bol}$, L/L$_\odot$, T$_e$, R/R$_\odot$, and M/M$_\odot$. Explain how you obtained each of the requested quantities in comments below the table. In addition, comment on the likely age and chemical composition of this star and whether it is likely
+to have a planetary system. As always, justify your answers.
+
+\end{problem}
+
+ \begin{answer}{3}
+Your answer goes here. Show your work. Justify your conclusions.
+\end{answer}
+ 
+\begin{problem}{4} Fun with magnitudes and colors! If a star with a parallax of 25 mas that initially appears to be single and is measured to have V=6.50, later turns out to be a spectroscopic binary with equal mass components, what is the apparent magnitude of each component? Neglecting reddening, what is the absolute magnitude of each component? If that same star has a measured B-V = 1.25, what is the B-V of each component?
+
+\end{problem}
+
+\begin{answer}{4}
+Your answer goes here. Show your work. Justify your conclusions.
+\end{answer}
+ 
+\begin{problem}{5} More fun with magnitudes and colors! Suppose a binary system is composed of an A star, with V = 7.80 and B-V = 0.00, and a K star, with V = 8.20 and B-V = +1.50. If the stars are so close together on the sky that that they cannot be resolved as individual objects (i.e. an unresolved binary), what will be the measured V magnitude and B-V color of the ``star" (that is actually the combined light of both components)? 
+
+\end{problem}
+
+\begin{answer}{5}
+Your answer goes here. Show your work. Justify your conclusions.
+\end{answer}
+ 
+\end{document}
