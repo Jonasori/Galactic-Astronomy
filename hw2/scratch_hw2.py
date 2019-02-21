@@ -18,8 +18,8 @@ from collections import Counter
 from inspect import *
 sns.set_style('white')
 
-# c, h, k = c.to('cm/s').value, h.to('erg s').value, k_B.to('erg/K').value
-# c, h, k = c.to('m/s').value, h.to('J s').value, k_B.to('J/K').value
+# Load the data for problem 2
+mags = [9.31, 8.94, 8.11, 7.93, 7.84]
 
 
 
@@ -55,8 +55,6 @@ def spectrum(t, coeff, show=False):
 
 
 
-
-
 def lnprob(p, mags, priors, save=False):
     t, coeff = p
 
@@ -85,8 +83,6 @@ def lnprob(p, mags, priors, save=False):
     chisq = np.sum((model - data)**2)
     lnp = -0.5 * chisq
     return lnp
-
-
 
 
 
@@ -129,10 +125,7 @@ def run_mcmc(mags=mags, nsteps=1000):
     return (sampler, df)
 
 
-# run2 = run_mcmc(mags, nsteps=50)
 
-
-mags = [9.31, 8.94, 8.11, 7.93, 7.84]
 def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
     plt.close()
 
@@ -181,13 +174,7 @@ def mcmc_full_driver(prev_run=None, nsteps=20, save=False):
 
 # mcmc_full_driver()
 
-# pos, prob, state = run
-#
-# run.chain.shape
-#
-# run.flatchain
-#
-# run.get_lnprob(run.chain[0, 0, :])
+
 
 
 # Problem 3
