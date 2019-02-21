@@ -5,7 +5,6 @@ Due Feb. 14
 """
 
 import sys
-import kplr
 import emcee
 import cPickle
 import numpy as np
