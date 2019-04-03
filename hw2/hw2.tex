@@ -72,7 +72,7 @@
 
 
 % make title bold and 14 pt font (Latex default is non-bold, 11 pt)
-\title{\Large \textbf{Galactic Astronomy: Problem Set 2}}
+\title{\Large \textbf{Galactic Astronomy CODY: Problem Set 2}}
 
 \author{{\rm Jonas Powell, \textit{Wesleyan University}}}
 
@@ -139,7 +139,7 @@
   \begin{figure}[htp]
     \hspace*{\fill}%
     \subcaptionbox{\label{fig:mcmc_kde}}{\includegraphics[width=0.42\linewidth]{prob2_kde.pdf}}\hfill%
-    \subcaptionbox{\label{fig:mcmc_spectrum}}{\includegraphics[width=0.56\linewidth]{prob2_spectrum.pdf}}\hfill%
+    \subcaptionbox{\label{fig:mcmc_spectrum}}{\includegraphics[width=0.52\linewidth]{prob2_spectrum.pdf}}\hfill%
     \hspace*{\fill}%
     \caption{Results from an MCMC fitting run. The kernel-density estimate (KDE) on the left characterizes the probability distribution of points in $\Omega_0-T$ parameter space, where darker regions correspond to better fits. On the right, data and best-fit model are overlaid, demonstrating that a good solution was found.}
   \end{figure}
@@ -147,7 +147,7 @@
 
   To run my MCMC, I developed a probability function that sampled a blackbody curve of a given temperature at the frequencies of the given data, then calculated a $\chi^2$ value between the data and model ($\chi^2 = \sum_i (\text{data} - \text{model})^2$), which was then turned into a log-probability ($\ln \text{prob} = -0.5 \chi^2$) value and fed back into the MCMC run, informing the run's next step. The log-probabilities are shown in Fig \ref{fig:mcmc_kde} in $\Omega_0-T$ parameter space.
 
-  As we see, there is some degree of degeneracy between the two parameters. This is somewhat reasonable, since increases in temperature and solid angle-subtended will both result in increased flux density for a source. However, the resulting fit (Fig \ref{fig:mcmc_spectrum}) looks pretty splendid, returning a best-fit temperature of 6745 K, which is characteristic of an F3 star. This is quite close to the F2 stellar type that is predicted by the star's 0.37 B-V color, indicating that the star is either truly an F3 that has been a bit reddened, or it is an F2 star that is slightly too cool.
+  As we see, there is some degree of degeneracy between the two parameters. This is somewhat reasonable, since increases in temperature and solid angle-subtended will both result in increased flux density for a source. However, the resulting fit (Fig \ref{fig:mcmc_spectrum}) looks pretty splendid, returning a best-fit temperature of 6783K\footnote{This is a little bit strange. Obviously, this temperature results in a great fit, as shown by the spectrum, but it visually looks like the darkest part of the KDE, at least to my eye, is centered more towards 7500K or so. Still, the process of retrieving the best-fit values is an automated one (not something I do by hand), so I think this is more a problem with the KDE plot than with the fitting itself.}, which is characteristic of an F3 star. This is quite close to the F2 stellar type that is predicted by the star's 0.37 B-V color, indicating that the star is either truly an F3 that has been a bit reddened, or it is an F2 star that is slightly too cool.
 \end{answer}
 
 
