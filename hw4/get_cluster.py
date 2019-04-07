@@ -239,7 +239,7 @@ class Cluster:
         fig.tight_layout()
         fig.subplots_adjust(top=0.85, bottom=0.1)
         if save is True:
-            outname = './HRD_{}_{}.png'.format(self.name.upper(), self.n_sources)
+            outname = './plots/HRD_{}_{}.png'.format(self.name.upper(), self.n_sources)
             plt.savefig(outname, dpi=200)
             print("Saved to ", outname)
         else:
@@ -270,7 +270,7 @@ class Cluster:
         # ax.set_xlim(ax.get_xlim()[::-1])
 
         if save:
-            plt.savefig('{}_HR-isochrones_{}-sources.png'.format(self.name, self.n_sources), dpi=300)
+            plt.savefig('./plots/{}_HR-isochrones_{}-sources.png'.format(self.name, self.n_sources), dpi=300)
         else:
             plt.show()
 
