@@ -1,0 +1,200 @@
+# How the isochrone filenaming works:
+# feh[p or m for plus or minus][feh_ratio]y[y decimal as a percentage (i.e. 0.4 -> 40)].Gaia(_2)
+
+# Could automate this process, not going to.
+# pm_feh = m if feh < 0 else p
+# path = 'feh' + pm_feh + str(abs(feh)) + 'afe' + pm_afe + str(abs(int(afe * 100))
+
+
+m44:
+  isochrone_path: ./isochrones/fehp00afep0.Gaia
+  ra: 08h40m24.0s
+  dec: 19d59m0s
+  radec_radius: 1.5
+  pm_ra: -1
+  pm_dec: -1
+  pm_radius: 10
+  distance: 177
+  parallax: 0.4
+  parallax_radius: 1.5
+  isochrone_start:
+  isochrone_stop:
+
+
+m43:
+  isochrone_path: ./isochrones/fehp00afep0.Gaia
+  ra: 05h35m31.0s
+  dec: −05d16m12s
+  # dec: −05d17m57s
+  radec_radius: 0.5
+  pm_ra: 1
+  pm_dec: 0
+  pm_radius: 2
+  distance: 389
+  parallax: 2.6
+  parallax_radius: 0.5
+  isochrone_start:
+  isochrone_stop:
+
+
+
+m42:
+  isochrone_path: ./isochrones/fehp00afep0.Gaia
+  ra: 05h35m17.3s
+  dec: −05d23m28s
+  radec_radius: 0.9
+  pm_ra: 1.3
+  pm_dec: 0
+  pm_radius: 2.
+  distance: 412
+  parallax: 2.55
+  parallax_radius: 0.25
+  isochrone_start:
+  isochrone_stop:
+
+
+
+m13:
+  isochrone_path: ./isochrones/fehp00afep0.Gaia
+  ra: 16h41m41.24s
+  dec: +36d27m35.5s
+  radec_radius: 2
+  pm_ra: -5
+  pm_dec: -5
+  pm_radius: 12
+  distance: 400
+  parallax:
+  parallax_radius: 3
+  isochrone_start:
+  isochrone_stop:
+
+
+
+
+
+
+
+
+m5:
+  isochrone_path: ./isochrones/fehm10afep0.Gaia
+  ra: 15h18m33.22s
+  dec: +02d04m51.7s
+  radec_radius: 2
+  pm_ra: -5
+  pm_dec: -5
+  pm_radius: 12
+  distance: 7500
+  parallax: 0.5
+  parallax_radius: 2
+  isochrone_start:
+  isochrone_stop:
+
+
+omegacen:
+  isochrone_path: ./isochrones/fehm15afep0.Gaia
+  ra: 13h26m47.28s
+  dec: 47d28m46.1s
+  radec_radius: 2
+  pm_ra: 1.6
+  pm_dec: -0.15
+  pm_radius: 3
+  distance: 4844.302
+  parallax:
+  parallax_radius: 2
+  isochrone_start:
+  isochrone_stop:
+
+
+# 47 Tucannae. Metallicy: -0.78
+# This is cool - can see two regions with pm_radius=5
+ngc104:
+  isochrone_path: ./isochrones/fehm05afep8.Gaia
+  ra: 00h24m05.359s
+  dec: -72d04m53.2s
+  radec_radius: 0.5
+  pm_ra: 5.3
+  pm_dec: -2.4
+  pm_radius: 2.5
+  distance: 5000
+  parallax:
+  parallax_radius: 0.3
+  isochrone_start:
+  isochrone_stop:
+
+
+
+m67:
+  isochrone_path: ./isochrones/fehm10afep0y40.Gaia
+  ra: 08h51m20s
+  dec: +11d49m0s
+  radec_radius: 2
+  pm_ra: 0
+  pm_dec: -1
+  pm_radius: 8
+  distance: 850
+  parallax: 0.3
+  parallax_radius: 4
+  isochrone_start:
+  isochrone_stop:
+
+ngc188:
+  isochrone_path: ./isochrones/fehm10afep0y40.Gaia
+  ra:
+  dec:
+  radec_radius:
+  pm_ra:
+  pm_dec:
+  pm_radius:
+  distance:
+  parallax:
+  parallax_radius:
+  isochrone_start:
+  isochrone_stop:
+
+
+ngc4833:
+  isochrone_path: ./isochrones/fehm10afep0y40.Gaia
+  ra: 12h59m33.92s
+  dec: -70d52m35.4s
+  radec_radius: 2
+  pm_ra: -8.110
+  pm_dec: -0.960
+  pm_radius: 5
+  distance: 6600
+  parallax: 0.2
+  parallax_radius: 0.6
+  isochrone_start:
+  isochrone_stop:
+
+
+
+m22:
+  isochrone_path: ./isochrones/fehm10afep0y40.Gaia
+  ra: 18h36m23.94s
+  dec: -23d54m17.1s
+  radec_radius: 0.5
+  pm_ra: -2.2
+  pm_dec: -3.
+  pm_radius: 8
+  distance: 3000
+  parallax:
+  parallax_radius: 0.3
+  isochrone_start:
+  isochrone_stop:
+
+
+
+
+m45:
+  isochrone_path: ./isochrones/fehm10afep0y40.Gaia
+  ra:
+  dec:
+  radec_radius:
+  pm_ra:
+  pm_dec:
+  pm_radius:
+  distance:
+  parallax:
+  parallax_radius:
+  isochrone_start:
+  isochrone_stop:
